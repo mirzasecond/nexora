@@ -4,24 +4,25 @@
   "type": "module",
   "main": "src/index.ts",
   "scripts": {
-    "dev": "node --loader ts-node/esm src/index.ts",
+    "dev": "tsx watch src/index.ts",
     "build": "tsc",
     "start": "node dist/index.js"
   },
   "dependencies": {
-    "fastify": "^4.25.2",
     "@fastify/cors": "^8.4.2",
     "@fastify/jwt": "^7.2.4",
-    "pg": "^8.11.3",
     "bcryptjs": "^2.4.3",
     "dotenv": "^16.3.1",
+    "fastify": "^4.25.2",
+    "pg": "^8.11.3",
     "zod": "^3.22.4"
   },
   "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
     "@types/node": "^20.10.6",
     "@types/pg": "^8.11.3",
-    "@types/bcryptjs": "^2.4.6",
-    "typescript": "^5.3.3",
-    "ts-node": "^10.9.2"
+    "ts-node": "^10.9.2",
+    "tsx": "^4.23.15",
+    "typescript": "^5.3.3"
   }
 }
