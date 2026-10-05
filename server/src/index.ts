@@ -6,6 +6,7 @@ import { authRoutes } from './routes/auth';
 import { playerRoutes } from './routes/player';
 import { questRoutes } from './routes/quests';
 import { gameDataRoutes } from './routes/gameData';
+import { inventoryRoutes } from './routes/inventory';
 
 dotenv.config();
 
@@ -24,6 +25,7 @@ fastify.register(authRoutes);
 fastify.register(playerRoutes);
 fastify.register(questRoutes);
 fastify.register(gameDataRoutes);
+fastify.register(inventoryRoutes);
 
 fastify.listen({ port, host }, (err, address) => {
   if (err) {

@@ -53,6 +53,26 @@ export const apiClient = {
   getEnemies: () => api.get('/game/enemies'),
 
   getItems: () => api.get('/game/items'),
+
+  // Inventory
+  getInventory: () => api.get('/inventory'),
+
+  getEquipment: () => api.get('/equipment'),
+
+  equipItem: (itemId: string, slot: string) =>
+    api.post('/equipment/equip', { itemId, slot }),
+
+  unequipItem: (slot: string) =>
+    api.post('/equipment/unequip', { slot }),
+
+  // Shop
+  getShopItems: () => api.get('/shop/items'),
+
+  buyItem: (itemId: string, quantity: number) =>
+    api.post('/shop/buy', { itemId, quantity }),
+
+  sellItem: (itemId: string, quantity: number) =>
+    api.post('/shop/sell', { itemId, quantity }),
 };
 
 export default api;
