@@ -73,6 +73,20 @@ export const apiClient = {
 
   sellItem: (itemId: string, quantity: number) =>
     api.post('/shop/sell', { itemId, quantity }),
+
+  // Leaderboard
+  getLeaderboard: () => api.get('/leaderboard'),
+
+  // Admin
+  getAdminStats: () => api.get('/admin/stats'),
+
+  getAdminPlayers: () => api.get('/admin/players'),
+
+  getPlayerAchievements: (playerId: string) =>
+    api.get(`/admin/players/${playerId}/achievements`),
+
+  getPlayerStats: (playerId: string) =>
+    api.get(`/admin/players/${playerId}/stats`),
 };
 
 export default api;
