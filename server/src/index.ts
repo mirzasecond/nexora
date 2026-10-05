@@ -8,6 +8,7 @@ import { questRoutes } from './routes/quests';
 import { gameDataRoutes } from './routes/gameData';
 import { inventoryRoutes } from './routes/inventory';
 import { adminRoutes } from './routes/admin';
+import { runMigrations } from './migrations';
 
 dotenv.config();
 
@@ -29,10 +30,20 @@ fastify.register(gameDataRoutes);
 fastify.register(inventoryRoutes);
 fastify.register(adminRoutes);
 
-fastify.listen({ port, host }, (err, address) => {
-  if (err) {
+// Start server with migrations
+const start = async () => {
+  try {
+    console.log('🔄 Running database migrations...');
+    await runMigrations();
+    console.log('✅ Migrations completed');
+
+    await fastify.listen({ port, host });
+    console.log(`🎮 NEXORA Server listening at http://${host}:${port}`);
+  } catch (err) {
     fastify.log.error(err);
     process.exit(1);
   }
-  console.log(`🎮 NEXORA Server listening at ${address}`);
-});
+};
+
+start();
+
