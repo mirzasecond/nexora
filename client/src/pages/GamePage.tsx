@@ -3,6 +3,7 @@ import { Canvas } from '@react-three/fiber';
 import GameHUD from '../components/GameHUD';
 import GameScene from '../components/GameScene';
 import PlayerController from '../components/PlayerController';
+import CombatSystem from '../systems/CombatSystem';
 
 export default function GamePage() {
   return (
@@ -20,6 +21,7 @@ export default function GamePage() {
         <PlayerController />
       </Canvas>
 
+      <CombatSystem />
       <GameHUD />
     </div>
   );

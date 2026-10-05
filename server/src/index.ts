@@ -4,6 +4,8 @@ import jwt from '@fastify/jwt';
 import dotenv from 'dotenv';
 import { authRoutes } from './routes/auth';
 import { playerRoutes } from './routes/player';
+import { questRoutes } from './routes/quests';
+import { gameDataRoutes } from './routes/gameData';
 
 dotenv.config();
 
@@ -20,6 +22,8 @@ fastify.get('/', async () => ({ message: 'NEXORA Server', status: 'online' }));
 // Register routes
 fastify.register(authRoutes);
 fastify.register(playerRoutes);
+fastify.register(questRoutes);
+fastify.register(gameDataRoutes);
 
 fastify.listen({ port, host }, (err, address) => {
   if (err) {

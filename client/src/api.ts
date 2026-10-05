@@ -37,6 +37,22 @@ export const apiClient = {
   addXP: (amount: number) => api.post('/player/xp', { amount }),
 
   addCoins: (amount: number) => api.post('/player/coins', { amount }),
+
+  // Quests
+  getQuests: () => api.get('/quests'),
+
+  getPlayerQuests: () => api.get('/player/quests'),
+
+  acceptQuest: (questId: string) => api.post(`/quests/${questId}/accept`),
+
+  completeQuest: (questId: string) => api.post(`/quests/${questId}/complete`),
+
+  // Game Data
+  getNPCs: () => api.get('/game/npcs'),
+
+  getEnemies: () => api.get('/game/enemies'),
+
+  getItems: () => api.get('/game/items'),
 };
 
 export default api;

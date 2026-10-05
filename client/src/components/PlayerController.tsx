@@ -2,17 +2,33 @@ import React, { useRef, useEffect, useState } from 'react';
 import { useFrame, useThree } from '@react-three/fiber';
 import { Mesh, Vector3 } from 'three';
 import { useKeyboardControls } from '../hooks/useKeyboardControls';
+import { usePlayerStore } from '../store';
 
 export default function PlayerController() {
   const meshRef = useRef<Mesh>(null);
   const { camera } = useThree();
   const [velocity, setVelocity] = useState(new Vector3(0, 0, 0));
   const [isGrounded, setIsGrounded] = useState(false);
+  const [isAttacking, setIsAttacking] = useState(false);
 
   const keys = useKeyboardControls();
   const moveSpeed = 10;
   const sprintSpeed = 20;
   const jumpForce = 15;
+
+  // Handle combat attacks
+  useEffect(() => {
+    const handleMouseClick = (e: MouseEvent) => {
+      if (meshRef.current && (window as any).nexoraAttack) {
+        (window as any).nexoraAttack(meshRef.current.position, 'slime_1');
+        setIsAttacking(true);
+        setTimeout(() => setIsAttacking(false), 200);
+      }
+    };
+
+    window.addEventListener('click', handleMouseClick);
+    return () => window.removeEventListener('click', handleMouseClick);
+  }, []);
 
   useFrame(() => {
     if (!meshRef.current) return;
@@ -69,15 +85,18 @@ export default function PlayerController() {
 
     // Camera follow
     const cameraOffset = new Vector3(0, 5, 10);
-    camera.position.lerp(
-      pos.clone().add(cameraOffset),
-      0.1
-    );
+    camera.position.lerp(pos.clone().add(cameraOffset), 0.1);
     camera.lookAt(pos.x, pos.y + 1, pos.z);
   });
 
   return (
-    <mesh ref={meshRef} position={[0, 1, 0]} castShadow receiveShadow>
+    <mesh
+      ref={meshRef}
+      position={[0, 1, 0]}
+      castShadow
+      receiveShadow
+      scale={isAttacking ? [1.05, 1.05, 1.05] : [1, 1, 1]}
+    >
       <boxGeometry args={[0.6, 1.8, 0.6]} />
       <meshStandardMaterial color="#4f46e5" />
     </mesh>

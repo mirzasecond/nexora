@@ -119,6 +119,32 @@ CREATE TABLE IF NOT EXISTS statistics (
   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+-- NPCs table
+CREATE TABLE IF NOT EXISTS npcs (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  name VARCHAR(100) NOT NULL,
+  type VARCHAR(50) NOT NULL,
+  position_x FLOAT,
+  position_y FLOAT,
+  position_z FLOAT,
+  dialogue TEXT,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Enemies table
+CREATE TABLE IF NOT EXISTS enemies (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  name VARCHAR(100) NOT NULL,
+  hp INT,
+  damage INT,
+  xp_reward INT,
+  coin_reward INT,
+  speed FLOAT,
+  detection_range FLOAT,
+  attack_range FLOAT,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
 -- Create indexes
 CREATE INDEX IF NOT EXISTS idx_users_username ON users(username);
 CREATE INDEX IF NOT EXISTS idx_users_email ON users(email);
